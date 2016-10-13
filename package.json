@@ -1,0 +1,31 @@
+{
+  "name": "gymbuddy",
+  "version": "0.0.1",
+  "description": "An application that helps people connect with local gym goers",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acsant/GymBuddy.git"
+  },
+  "keywords": [
+    "Gym",
+    "workout",
+    "people",
+    "exercise",
+    "local",
+    "app",
+    "application",
+    "android",
+    "mobile",
+    "social"
+  ],
+  "author": "Akash Sant",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/acsant/GymBuddy/issues"
+  },
+  "homepage": "https://github.com/acsant/GymBuddy#readme"
+}
