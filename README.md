@@ -7,6 +7,9 @@ this application better understand the structure of the backend services. This
 would allow the developers to easily contribute to the project as well as
 consume the API for the GymBuddy android app.
 
+#### Technology Stack
+Node.js will be used to write a communications server and MongoDB for the data store.
+
 ### Authentication
 An authentication layer must be provided as a gateway to the application. The authentication will be a local authentication where user information will be collected on sign-up and stored or future login.
 ##### User:
