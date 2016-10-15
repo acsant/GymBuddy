@@ -1,7 +1,7 @@
 #Gym Buddy - API Documentation
 ###### An application that helps people connect with local gym goers
 
-### Introduction
+### 1. Introduction
 The purpose of this API documentation is to allow developers and designers of
 this application better understand the structure of the backend services. This
 would allow the developers to easily contribute to the project as well as
@@ -10,7 +10,7 @@ consume the API for the GymBuddy android app.
 #### Technology Stack
 Node.js will be used to write a communications server and MongoDB for the data store.
 
-### Authentication
+### 2. Authentication
 An authentication layer must be provided as a gateway to the application. The authentication will be a local authentication where user information will be collected on sign-up and stored or future login.
 ##### User:
 ```
@@ -25,7 +25,7 @@ User: {
 	gym_attended:,
 }
 ```
-### Data store
+### 3. Data store
 #### User:
 ```
 User: {
@@ -78,6 +78,31 @@ User-Goal: {
 	goal: {GOAL}
 }
 ```
+
+### 4. API Calls
+#### User [GET] - /user
+
+
+| Parameters | Response                            |
+|:-----------|:-----------------------------------:|
+|`user_id`   |Returns a user by `id`                 |
+|`gym_id`      |Get users attending a gym with `id = gym_id` |
+
+#### User[POST] - /user/register
+###### Request Body
+```
+{
+	first_name:,
+  	last_name:,
+  	age:,
+  	weight:,
+  	body_fat:,
+  	bio:,
+  	gym_goals:,
+ 	gym_attended:,	
+}
+```
+
 
 ### Note: This documentation is a rough version and may change with the project
 
