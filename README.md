@@ -88,7 +88,7 @@ User-Goal: {
 |`user_id`   |Returns a user by `id`                 |
 |`gym_id`      |Get users attending a gym with `id = gym_id` |
 
-#### User[POST] - /user/register
+#### User [POST] - /user/register
 ###### Request Body
 ```
 {

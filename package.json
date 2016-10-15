@@ -4,7 +4,8 @@
   "description": "An application that helps people connect with local gym goers",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -27,5 +28,13 @@
   "bugs": {
     "url": "https://github.com/acsant/GymBuddy/issues"
   },
-  "homepage": "https://github.com/acsant/GymBuddy#readme"
+  "homepage": "https://github.com/acsant/GymBuddy#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "lodash": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
 }
