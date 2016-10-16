@@ -17,6 +17,7 @@ mongoose.connect( dbconfig.url );
 // Configure parser for both JSON and url-encoded requests
 app.use( bodyparser.urlencoded( {extended: true} ) );
 app.use( bodyparser.json() );
+app.use( bodyparser.urlencoded({extended: true}) );
 app.use( session({secret: 'gymbuddysecret'}) );
 
 // Initialize passport
