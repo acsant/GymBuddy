@@ -17,10 +17,11 @@ module.exports = function ( app, passport ) {
   /**
    * Route the login request to passport local login
    */
-  app.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/',
-    failureRedirect: '/register'
-  }));
+  app.post('/login', passport.authenticate('local-login', { failureRedirect: '/'}),
+      function (req, res) {
+        console.log(req.user);
+        res.send(req.user);
+      });
 
   /**
    * Route the register request to passport signup
