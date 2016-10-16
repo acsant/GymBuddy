@@ -14,9 +14,11 @@ module.exports = function ( passport ) {
       User.findOne({'local.auth.email': email}, function (err, user) {
         if (err)
           return done(err);
-        if (!user)
-          return done(null, false);
-        return done(null, user);
+
+        if ( user && user.isValidPassword( password ) )
+          return done(null, user);
+
+        return done(null, false);
       });
     });
   }));
