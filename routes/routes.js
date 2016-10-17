@@ -17,11 +17,18 @@ module.exports = function ( app, passport ) {
   /**
    * Route the login request to passport local login
    */
-  app.post('/login', passport.authenticate('local-login', { failureRedirect: '/'}),
+  app.post('/login', passport.authenticate('local-login', 
+      { failureRedirect: '/notauthorized'}),
       function (req, res) {
-        console.log(req.user);
         res.json(req.user);
       });
+
+  /**
+   * This response is sent when the user is not authenticated
+   */
+  app.get('/notauthorized', function (req, res) {
+    res.json(403, {message: 'Invalid user.'});
+  });
 
   /**
    * Route the register request to passport signup

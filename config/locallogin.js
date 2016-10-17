@@ -10,19 +10,14 @@ module.exports = function ( passport ) {
   },
   // Find a user by email 
   function ( req, email, password, done ) {
-    console.log("Entering login");
     process.nextTick(function () {
       User.findOne({'local.auth.email': email}, function (err, user) {
         if (err)
           return done(err);
 
-        console.log(password);
-        console.log(user.isValidPassword(password));
         if ( user && user.isValidPassword( password ) ) {
-          console.log("valid password");
           return done(null, user);
         }
-        console.log("Auth fail");
         return done(null, false);
       });
     });
