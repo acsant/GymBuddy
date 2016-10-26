@@ -103,6 +103,24 @@ User-Goal: {
 }
 ```
 
+#### Introducing GridFS
+Part of the application is to store user profiles, which include larger than usual data files, for instance user image ( Profile Picture ). Two storage options were considered to achieve this. BLOB storage, as well as GridFS. Blob storage refers to binary large objects. This is helpful in storing smaller files. Images usually involve large file size hence GridFS is chosen. A file in GridFS can be represented as such:
+
+```
+file: {
+  "_id" : <ObjectId>,
+  "length" : <num>,
+  "chunkSize" : <num>,
+  "uploadDate" : <timestamp>,
+  "md5" : <hash>,
+  "filename" : <string>,
+  "contentType" : <string>,
+  "aliases" : <string array>,
+  "metadata" : <dataObject>,
+}
+```
+
+Initially, only one image will be supported per user. So an image can be linked to the user through a `file_id` attribute in the user object.
 
 ### Note: This documentation is a rough version and may change with the project
 
