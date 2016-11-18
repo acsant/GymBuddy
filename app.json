@@ -1,0 +1,7 @@
+{
+    "name": "gymbuddyandroid",
+    "description": "An application allowing users to find gym goers",
+    "repository": "https://github.com/acsant/GymBuddy",
+    "logo": "https://node-js-sample.herokuapp.com/node.png",
+    "keywords": ["node", "express", "static"]
+}

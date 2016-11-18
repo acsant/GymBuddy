@@ -1,6 +1,8 @@
 #Gym Buddy - API Documentation
 ###### An application that helps people connect with local gym goers
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/acsant/GymBuddy)
+
 ### 1. Introduction
 The purpose of this API documentation is to allow developers and designers of
 this application better understand the structure of the backend services. This
