@@ -19,6 +19,7 @@ module.exports = function (passport) {
 
         // Create user object to save fromt the request body
         var newUser = new User();
+        var userGoals = req.body.objectives;
         newUser.local.auth.email = email;
         newUser.local.email = email;
         newUser.local.first_name = req.body.first_name;
@@ -27,6 +28,7 @@ module.exports = function (passport) {
         newUser.local.age = req.body.age;
         newUser.local.body_fat = req.body.body_fat;
         newUser.local.bio = req.body.bio;
+        newUser.local.objectives = userGoals.split(',');
 
         newUser.save(function (err) {
           if (err)

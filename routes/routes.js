@@ -1,11 +1,20 @@
 "use strict";
-module.exports = function ( app, passport ) {
+
+var User = require('../models/user');
+
+
+// AWS Configs
+var AWS_ACCESS_KEY = 'AKIAJO75MG4BZDI3K2BA';
+var AWS_SECRET_KEY = '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';
+var S3_BUCKET = 'gymbuddies-bucket';
+
+module.exports = function ( app, passport, aws ) {
   /**
    * Handle Cors requests
    */
   app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Header", "Origin, X-Requested-With, " + 
+    res.header("Access-Control-Allow-Header", "Origin, X-Requested-With, " +
         "Content-Type, Accept");
     next();
   });
@@ -17,7 +26,7 @@ module.exports = function ( app, passport ) {
   /**
    * Route the login request to passport local login
    */
-  app.post('/login', passport.authenticate('local-login', 
+  app.post('/login', passport.authenticate('local-login',
       { failureRedirect: '/notauthorized'}),
       function (req, res) {
         res.json(req.user);
@@ -38,4 +47,47 @@ module.exports = function ( app, passport ) {
     failureRedirect: '/register'
   }));
 
+  /**
+  * Get a list of users for the communities page
+  */
+  app.get('/communities/users', function ( req, res ) {
+    // Get the user email from request body
+    var email = req.param('email');
+    var usr = User.findOne({'local.auth.email': email}, function (err, user) {
+        if ( err )
+            res.json(403, {message: 'Not authorized to access the feature.'});
+
+        if ( user ) {
+            User.find({'_id': { $ne: user._id },
+                'local.objectives': { $in: user.local.objectives }}).exec(function (err, users) {
+                res.json(users);
+            });
+        }
+    });
+  });
+
+  /**
+   * Handles signing for the S3 uploads
+   */
+   app.get('/sign', function ( req, res ) {
+    aws.config.update({accessKeyId: AWS_ACCESS_KEY, secretAccessKey: AWS_SECRET_KEY});
+
+    var s3 = new aws.S3();
+    var options = {
+      Bucker: S3_BUCKET,
+      Key: req.query.file_name,
+      Expires: 60,
+      ContentType: req.query.file_type,
+      ACL: 'public-read'
+    }
+
+    s3.getSignedUrl('putObject', options, function ( err, data ) {
+      if ( err ) return res.send('Error with S3');
+
+      res.json({
+        signed_request: data,
+        url: 'https://s3.amazonaws.com/' + S3_BUCKET + '/' + req.query.file_name
+      });
+    });
+   });
 }

@@ -35,7 +35,8 @@ User: {
 	age: {short int},
 	weight: {short int},
 	body_fat:{short int},
-	bio: {string}
+	bio: {string},
+  objectives: [String]
 }
 ```
 
@@ -121,6 +122,18 @@ file: {
 ```
 
 Initially, only one image will be supported per user. So an image can be linked to the user through a `file_id` attribute in the user object.
+
+#### Amazon S3
+Another option considered for user file storage is AWS S3. AWS S3 would be cost
+efficient, easy in terms of replication and with failsafe mechanisms. GridFS means storing files in a DB, which is most likely not the ideal option. Amazon S3 was designed for file storage hence it is also a well-managed option.
+
+```
+Meta-Data: {
+  "bucket_name": "gymbuddies-bucket",
+  "access_key_id": "******************",
+  "secret_access_key": "*****************"
+}
+```
 
 ### Note: This documentation is a rough version and may change with the project
 
