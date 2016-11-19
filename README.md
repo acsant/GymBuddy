@@ -118,8 +118,13 @@ User-Goal: {
 | Parameters | Response								|
 |:-----------|:------------------------------------:|
 |'email'     | Returns a user if information was    |
-|Update      | updated successfully                 |
-|params      |                                      |
+|'firstName' | updated successfully                 |
+|'lastName'  |                                      |
+|'age'		 |										|
+|'weight'	 |										|
+|'bodyFat'	 |										|
+|'bio'		 |										|
+|'goals'	 |										|
 
 #### Communities [GET] - /communities/users
 | Parameters | Response                             |

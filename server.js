@@ -32,8 +32,8 @@ require('./routes/routes.js')( app, passport );
 app.listen( app.get('port'), function (error) {
   if ( error ) {
     console.error( error );
-  } else { 
-    console.info("Listening to port %s. Direct all requests at " + 
+  } else {
+    console.info("Listening to port %s. Direct all requests at " +
         "http://localhost:%s/ in your browser",app.get('port'), app.get('port'));
   }
 } );

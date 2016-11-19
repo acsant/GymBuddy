@@ -28,7 +28,7 @@ module.exports = function (passport) {
         newUser.local.age = req.body.age;
         newUser.local.body_fat = req.body.body_fat;
         newUser.local.bio = req.body.bio;
-        newUser.local.objectives = userGoals.split(',');
+        newUser.local.objectives = userGoals.trim().split(/\s*,\s*/);
 
         newUser.save(function (err) {
           if (err)

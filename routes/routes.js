@@ -59,7 +59,8 @@ module.exports = function ( app, passport, aws ) {
 
         if ( user ) {
             User.find({'_id': { $ne: user._id },
-                'local.objectives': { $in: user.local.objectives }}).exec(function (err, users) {
+                'local.objectives': { $in: user.local.objectives }})
+                .exec(function (err, users) {
                 res.json(users);
             });
         }
@@ -67,9 +68,34 @@ module.exports = function ( app, passport, aws ) {
   });
 
   /**
-   * Handles signing for the S3 uploads
-   */
-   app.get('/sign', function ( req, res ) {
+  * Endpoint to allow edit user information
+  * @param email    update the information for user with this email
+  */
+  app.post('/user/edit', function ( req, res ) {
+     var email = req.param('email');
+     var objectives = req.param('goals');
+     if ( objectives ) {
+         objectives = objectives.trim().split(/\s*,\s*/);
+     }
+     // Get the user
+     var user = User.findOne({'local.auth.email': email}, function (err, user) {
+         user.local.first_name = req.param('firstName') || user.local.first_name;
+         user.local.last_name = req.param('lastName') || user.local.last_name;
+         user.local.age = req.param('age') || user.local.age;
+         user.local.weight = req.param('weight') || user.local.weight;
+         user.local.body_fat = req.param('bodyFat') || user.local.body_fat;
+         user.local.bio = req.param('bio') || user.local.bio;
+         user.local.objectives = objectives || user.local.objectives;
+         user.save(function (err) {
+             res.send(user);
+         });
+     });
+  });
+
+  /**
+  * Handles signing for the S3 uploads
+  */
+  app.get('/sign', function ( req, res ) {
     aws.config.update({accessKeyId: AWS_ACCESS_KEY, secretAccessKey: AWS_SECRET_KEY});
 
     var s3 = new aws.S3();
