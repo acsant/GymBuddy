@@ -115,7 +115,11 @@ User-Goal: {
 ```
 
 #### User [POST] - /user/edit
-| Parameters | Response								|
+
+Edits the current user information and returns the updated
+user
+
+| Parameters | Field Description	        		|
 |:-----------|:------------------------------------:|
 |'email'     | Returns a user if information was    |
 |'firstName' | updated successfully                 |
@@ -124,7 +128,7 @@ User-Goal: {
 |'weight'	 |										|
 |'bodyFat'	 |										|
 |'bio'		 |										|
-|'goals'	 |										|
+|'goals'	 | Comma seperated string of objectives	|
 
 #### Communities [GET] - /communities/users
 | Parameters | Response                             |
