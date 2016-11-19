@@ -38,7 +38,7 @@ User: {
 	weight: {short int},
 	body_fat:{short int},
 	bio: {string},
-  objectives: [String]
+  	objectives: [String]
 }
 ```
 
@@ -83,13 +83,20 @@ User-Goal: {
 ```
 
 ### 4. API Calls
-#### User [GET] - /user
 
+#### Authentication [POST] - /login
+
+| Parameters | Response 	 						|
+|:-----------|:------------------------------------:|
+|'email'     | Return user information and          |
+|'password'  | authenticates the user               |
+
+#### User [GET] - /user
 
 | Parameters | Response                            |
 |:-----------|:-----------------------------------:|
-|`user_id`   |Returns a user by `id`                 |
-|`gym_id`      |Get users attending a gym with `id = gym_id` |
+|`email`     |Returns a user by `email`            |
+
 
 #### User [POST] - /user/register
 ###### Request Body
@@ -101,12 +108,26 @@ User-Goal: {
   	weight:,
   	body_fat:,
   	bio:,
-  	gym_goals:,
- 	gym_attended:,	
+  	objectives:,
+ 	email:,
+	password:,
 }
 ```
 
-#### Introducing GridFS
+#### User [POST] - /user/edit
+| Parameters | Response								|
+|:-----------|:------------------------------------:|
+|'email'     | Returns a user if information was    |
+|Update      | updated successfully                 |
+|params      |                                      |
+
+#### Communities [GET] - /communities/users
+| Parameters | Response                             |
+|:-----------|:------------------------------------:|
+|'email'	 | Returns a list of users who can be 	|
+|			 | matched based on objectives			|
+
+#### Introducing GridFS ( Option 1 for direct uploads )
 Part of the application is to store user profiles, which include larger than usual data files, for instance user image ( Profile Picture ). Two storage options were considered to achieve this. BLOB storage, as well as GridFS. Blob storage refers to binary large objects. This is helpful in storing smaller files. Images usually involve large file size hence GridFS is chosen. A file in GridFS can be represented as such:
 
 ```
@@ -125,7 +146,7 @@ file: {
 
 Initially, only one image will be supported per user. So an image can be linked to the user through a `file_id` attribute in the user object.
 
-#### Amazon S3
+#### Amazon S3 ( Option 2 for direct uploads )
 Another option considered for user file storage is AWS S3. AWS S3 would be cost
 efficient, easy in terms of replication and with failsafe mechanisms. GridFS means storing files in a DB, which is most likely not the ideal option. Amazon S3 was designed for file storage hence it is also a well-managed option.
 
@@ -138,5 +159,3 @@ Meta-Data: {
 ```
 
 ### Note: This documentation is a rough version and may change with the project
-
-
