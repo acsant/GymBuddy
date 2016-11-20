@@ -92,17 +92,20 @@ User-Goal: {
 
 #### User [POST] - /user/register
 ###### Request Body
+
+Parameters:
 ```
 {
 	first_name:,
   	last_name:,
+	phone_num,
   	age:,
   	weight:,
   	body_fat:,
   	bio:,
   	objectives:,
- 	email:,
-	password:,
+ 	gym_address,
+	gym_code
 }
 ```
 
