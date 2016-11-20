@@ -42,9 +42,9 @@ module.exports = function ( app, passport, aws ) {
   /**
    * Route the register request to passport signup
    */
-  app.post('/register', passport.authenticate('local-signup', {
+  app.post('/user/register', passport.authenticate('local-signup', {
     successRedirect: '/',
-    failureRedirect: '/register'
+    failureRedirect: '/user/register'
   }));
 
   /**
