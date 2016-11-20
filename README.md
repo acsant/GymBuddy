@@ -98,14 +98,16 @@ Parameters:
 {
 	first_name:,
   	last_name:,
-	phone_num,
+	phone_num:,
   	age:,
   	weight:,
   	body_fat:,
   	bio:,
+	email:,
+	password:,
   	objectives:,
- 	gym_address,
-	gym_code
+ 	gym_address:,
+	gym_code:
 }
 ```
 
