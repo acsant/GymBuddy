@@ -30,7 +30,9 @@ module.exports = function (passport) {
         newUser.local.age = req.body.age;
         newUser.local.body_fat = req.body.body_fat;
         newUser.local.bio = req.body.bio;
-        newUser.local.objectives = userGoals.trim().split(/\s*,\s*/);
+        if ( userGoals ) {
+            newUser.local.objectives = userGoals.trim().split(/\s*,\s*/);
+        }
         newUser.local.gym_address = req.body.gym_address;
         newUser.local.gym_code = req.body.gym_code;
 
