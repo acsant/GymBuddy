@@ -29,7 +29,7 @@ module.exports = function ( app, passport, aws ) {
   app.post('/login', passport.authenticate('local-login',
       { failureRedirect: '/notauthorized'}),
       function (req, res) {
-        res.json(req.user);
+        res.json(req.newUser);
       });
 
   /**
