@@ -82,6 +82,7 @@ module.exports = function ( app, passport, aws ) {
          user.local.first_name = req.param('firstName') || user.local.first_name;
          user.local.last_name = req.param('lastName') || user.local.last_name;
          user.local.age = req.param('age') || user.local.age;
+         user.local.phone_num = req.param('phone') || user.local.phone_num;
          user.local.weight = req.param('weight') || user.local.weight;
          user.local.body_fat = req.param('bodyFat') || user.local.body_fat;
          user.local.bio = req.param('bio') || user.local.bio;

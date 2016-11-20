@@ -11,6 +11,7 @@ var userSchema = mongoose.Schema({
     _id: String,
     first_name: String,
     last_name: String,
+    phone_num: String,
     age: Number,
     weight: Number,
     body_fat: Number,

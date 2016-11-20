@@ -124,6 +124,7 @@ user
 |'email'     | Returns a user if information was    |
 |'firstName' | updated successfully                 |
 |'lastName'  |                                      |
+|'phone'     |										|
 |'age'		 |										|
 |'weight'	 |										|
 |'bodyFat'	 |										|
