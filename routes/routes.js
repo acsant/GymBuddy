@@ -42,10 +42,12 @@ module.exports = function ( app, passport, aws ) {
   /**
    * Route the register request to passport signup
    */
-  app.post('/user/register', passport.authenticate('local-signup', {
-    successRedirect: '/',
-    failureRedirect: '/user/register'
-  }));
+  app.post('/user/register', passport.authenticate('local-signup',
+    { failureRedirect: '/user/register' }),
+    function ( req, res ) {
+        res.json(req.user);
+    }
+  );
 
   /**
   * Get a list of users for the communities page
