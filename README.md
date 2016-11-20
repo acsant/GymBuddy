@@ -14,19 +14,7 @@ Node.js will be used to write a communications server and MongoDB for the data s
 
 ### 2. Authentication
 An authentication layer must be provided as a gateway to the application. The authentication will be a local authentication where user information will be collected on sign-up and stored or future login.
-##### User:
-```
-User: {
-	first_name:,
-	last_name:,
-	age:,
-	weight:,
-	body_fat:,
-	bio:,
-	gym_goals:,
-	gym_attended:,
-}
-```
+
 ### 3. Data store
 #### User:
 ```
@@ -38,7 +26,11 @@ User: {
 	weight: {short int},
 	body_fat:{short int},
 	bio: {string},
-  	objectives: [String]
+  	objectives: [String],
+	phone_num: String,
+	gym_address: String,
+	gym_code: String,
+	matches: [user Ids]
 }
 ```
 
@@ -88,8 +80,8 @@ User-Goal: {
 
 | Parameters | Response 	 						|
 |:-----------|:------------------------------------:|
-|'email'     | Return user information and          |
-|'password'  | authenticates the user               |
+|`email`     | Return user information and          |
+|`password`  | authenticates the user               |
 
 #### User [GET] - /user
 
@@ -121,20 +113,42 @@ user
 
 | Parameters | Field Description	        		|
 |:-----------|:------------------------------------:|
-|'email'     | Returns a user if information was    |
-|'firstName' | updated successfully                 |
-|'lastName'  |                                      |
-|'phone'     |										|
-|'age'		 |										|
-|'weight'	 |										|
-|'bodyFat'	 |										|
-|'bio'		 |										|
-|'goals'	 | Comma seperated string of objectives	|
+|`email`     | Returns a user if information was    |
+|`firstName` | updated successfully                 |
+|`lastName`  |                                      |
+|`phone`     |										|
+|`age`		 |										|
+|`weight`	 |										|
+|`bodyFat`	 |										|
+|`bio`		 |										|
+|`goals`	 | Comma seperated string of objectives	|
+
+#### User [POST] - /user/match
+
+Used for matching the users.
+User with `matchEmail` as their email would end up in the current user's matches list.
+
+
+| Parameters  | Field Description  					 |
+|:------------|:-------------------------------------|
+| `email`	  | Email of the current user            |
+| `matchEmail`| Email of the user to be  matched with|
+
+#### User [GET] - /user/matches
+
+Returns a list of matches for a user with given `email`.
+
+| Parameters  | Field Description					|
+|:------------|:------------------------------------|
+| `email`	  | current user's email                |
 
 #### Communities [GET] - /communities/users
+
+Returns a list of suggested users for a given `email`.
+
 | Parameters | Response                             |
 |:-----------|:------------------------------------:|
-|'email'	 | Returns a list of users who can be 	|
+|`email`	 | Returns a list of users who can be 	|
 |			 | matched based on objectives			|
 
 #### Introducing GridFS ( Option 1 for direct uploads )

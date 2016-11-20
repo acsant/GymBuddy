@@ -20,6 +20,7 @@ module.exports = function (passport) {
         // Create user object to save fromt the request body
         var newUser = new User();
         var userGoals = req.body.objectives;
+        // Create new user instance on signup
         newUser.local.auth.email = email;
         newUser.local.email = email;
         newUser.local.first_name = req.body.first_name;
@@ -30,6 +31,8 @@ module.exports = function (passport) {
         newUser.local.body_fat = req.body.body_fat;
         newUser.local.bio = req.body.bio;
         newUser.local.objectives = userGoals.trim().split(/\s*,\s*/);
+        newUser.local.gym_address = req.body.gym_address;
+        newUser.local.gym_code = req.body.gym_code;
 
         newUser.save(function (err) {
           if (err)

@@ -16,7 +16,10 @@ var userSchema = mongoose.Schema({
     weight: Number,
     body_fat: Number,
     bio: String,
-    objectives: [ String ]
+    objectives: [ String ],
+    matches: [{ type: mongoose.Schema.ObjectId, unique: true, dropDups: true, ref: 'User' }],
+    gym_address: String,
+    gym_code: String
   }
 });
 
@@ -28,4 +31,5 @@ userSchema.methods.isValidPassword = function ( password ) {
   return bcrypt.compareSync( password, this.local.auth.password );
 };
 
-module.exports = mongoose.model( 'User', userSchema );
+var User = mongoose.model( 'User', userSchema );
+module.exports = User;

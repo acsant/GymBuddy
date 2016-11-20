@@ -68,6 +68,20 @@ module.exports = function ( app, passport, aws ) {
   });
 
   /**
+  * Get user by email
+  * @param email    Email of the resulting user
+  */
+  app.get('/user', function ( req, res ) {
+      var email = req.param('email');
+      User.findOne({ 'local.auth.email': email }, function (err, user) {
+          if (err)
+            res.json(404, {message: "User not found."});
+
+          res.send(user);
+      });
+  });
+
+  /**
   * Endpoint to allow edit user information
   * @param email    update the information for user with this email
   */
@@ -91,6 +105,46 @@ module.exports = function ( app, passport, aws ) {
              res.send(user);
          });
      });
+  });
+
+  /**
+  * Matching for users
+  * @param email, matchEmail       Match matchEmail to email
+  */
+  app.post('/user/match', function ( req, res ) {
+      var userEmail = req.param('email');
+      var matchEmail = req.param('matchEmail');
+
+      var matchPromise = User.findOne({ 'local.auth.email': matchEmail }).exec();
+      var userPromise = User.findOne({ 'local.auth.email': userEmail }).exec();
+
+      // Handle promises to assign the match to the user
+      matchPromise.then(function (matchUsr) {
+          User.update({ 'local.auth.email': userEmail },
+                        { $addToSet: { 'local.matches': matchUsr } },
+                        function (err, updated) {
+                            res.json(200, {message: 'Invalid user.'});
+                        });
+      });
+
+  });
+
+  /**
+  * Get a list users to whome the current user is matched as
+  * @param email    Email is the email of current user
+  */
+  app.get('/user/matches', function ( req, res ) {
+      var email = req.param('email');
+
+      var matchesPromise = User.findOne({ 'local.auth.email': email })
+                                .populate('local.matches')
+                                .exec();
+
+      // Return the auto populated matches
+      matchesPromise.then(function (user) {
+          res.send(user.local.matches);
+      });
+
   });
 
   /**
