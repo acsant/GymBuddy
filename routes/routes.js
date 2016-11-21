@@ -94,17 +94,19 @@ module.exports = function ( app, passport, aws ) {
          objectives = objectives.trim().split(/\s*,\s*/);
      }
      // Get the user
-     var user = User.findOne({'local.auth.email': email}, function (err, user) {
-         user.local.first_name = req.param('firstName') || user.local.first_name;
-         user.local.last_name = req.param('lastName') || user.local.last_name;
-         user.local.age = req.param('age') || user.local.age;
-         user.local.phone_num = req.param('phone') || user.local.phone_num;
-         user.local.weight = req.param('weight') || user.local.weight;
-         user.local.body_fat = req.param('bodyFat') || user.local.body_fat;
-         user.local.bio = req.param('bio') || user.local.bio;
-         user.local.objectives = objectives || user.local.objectives;
-         user.save(function (err) {
-             res.send(user);
+     User.findOne({'local.auth.email': email}, function (err, usr) {
+         usr.local.first_name = req.param('firstName') || usr.local.first_name;
+         usr.local.last_name = req.param('lastName') || usr.local.last_name;
+         usr.local.age = req.param('age') || usr.local.age;
+         usr.local.phone_num = req.param('phone_num') || usr.local.phone_num;
+         usr.local.weight = req.param('weight') || usr.local.weight;
+         usr.local.body_fat = req.param('body_fat') || usr.local.body_fat;
+         usr.local.bio = req.param('bio') || usr.local.bio;
+         if (objectives) {
+             usr.local.objectives = objectives;
+         }
+         usr.save(function (err) {
+             res.send(usr);
          });
      });
   });
