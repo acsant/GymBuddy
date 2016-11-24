@@ -112,6 +112,29 @@ module.exports = function ( app, passport, aws ) {
   });
 
   /**
+  * Check if two given users are a match
+  */
+  app.get('/user/ismatch', function(req, res) {
+      var userEmail = req.param('email');
+      var matchEmail = req.param('matchEmail');
+
+      var matchPromise = User.findOne({'local.auth.email': matchEmail}).exec();
+
+      matchPromise.then(function (matchUsr) {
+          User.findOne({'local.auth.email': userEmail,
+          '_id': {$in : matchUsr.local.matches}}).exec(function (err, usr) {
+
+            if ( usr ) {
+                res.json(200, {message: 'Match Found!'});
+            } else {
+                res.json(304, {message: 'Match Not Found'});
+            }
+
+          });
+      });
+  });
+
+  /**
   * Matching for users
   * @param email, matchEmail       Match matchEmail to email
   */
