@@ -156,6 +156,16 @@ Returns a list of suggested users for a given `email`.
 |`email`	 | Returns a list of users who can be 	|
 |			 | matched based on objectives			|
 
+#### Communities [GET] - /user/ismatch
+
+Returns true if user with `email` and a user with `matchEmail` are a match.
+
+| Parameters | Response                             |
+|:-----------|:------------------------------------:|
+|`email`	 |  	|
+|`matchEmail`			 | 			|
+
+
 #### Introducing GridFS ( Option 1 for direct uploads )
 Part of the application is to store user profiles, which include larger than usual data files, for instance user image ( Profile Picture ). Two storage options were considered to achieve this. BLOB storage, as well as GridFS. Blob storage refers to binary large objects. This is helpful in storing smaller files. Images usually involve large file size hence GridFS is chosen. A file in GridFS can be represented as such:
 
@@ -188,3 +198,5 @@ Meta-Data: {
 ```
 
 ### Note: This documentation is a rough version and may change with the project
+
+

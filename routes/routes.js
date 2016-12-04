@@ -4,8 +4,8 @@ var User = require('../models/user');
 
 
 // AWS Configs
-var AWS_ACCESS_KEY = 'AKIAJO75MG4BZDI3K2BA';
-var AWS_SECRET_KEY = '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';
+var AWS_ACCESS_KEY = '********************';
+var AWS_SECRET_KEY = '*******************';
 var S3_BUCKET = 'gymbuddies-bucket';
 
 module.exports = function ( app, passport, aws ) {
